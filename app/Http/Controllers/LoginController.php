@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\DB;
-
-class UsersController extends Controller
+class LoginController extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      *
@@ -28,18 +24,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //SESSION
-        // session create 1way
-        // request()->session()->put('user_name','Mosharaf Hossain');
-        // session delete
-        // request()->session()->pull('user_name');
-        // another 2way
-        // session(['user_name'=>'Mosharaf Hossain']);
-        // session()->pull('user_name');
-
-
-
-        return view('users.create');
+        return view('login.create');
     }
 
     /**
@@ -50,33 +35,12 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
-       
-            DB::transaction(function(){
-                $user= User::create([
-                    'name' => request('name') ,
-                    'email' => request('email')  
-                ]);
-                $path = request('image_path');
-        
-                $user->images()->create([
-                    'path' => $path
-                ]);
-            }, 3);
-
-        return back();
-    }
-
-    public function images()
-    
-    {
-        // return Image::all();
-        $image= Image::find(1);
-
-        // return $image;
-        // return $image->imageable;
-        return $image->load('imageable');
+        $user = User::where('email' , $request->username)->where('password', $request->password)->first();
+        // dd($user);
+        if($user)
+        {
+            session(['user_name' => $user->email, 'user_id' => $user->id ]);
+        }
     }
 
     /**

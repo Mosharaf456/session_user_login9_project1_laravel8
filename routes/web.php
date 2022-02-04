@@ -6,6 +6,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 // insert operation
 Route::get('/fileup','FileUploadController@create');
 
@@ -16,12 +18,13 @@ Route::get('/users/create','UsersController@create');
 
 Route::post('/users/create','UsersController@store');
 
-//show page
+// show page
 Route::get('/images','UsersController@images');
 
-//many to many poly
 
-// for store operation
+//
+//many to many poly
+// for all operations uses by default in laravel
 Route::resource('/videos','VideosController');
 
 Route::resource('/posts','PostsController');
@@ -34,5 +37,10 @@ Route::post('/videos/{id}/comments' , 'CommentsController@videoComment');
 Route::post('/posts/{id}/comments' , 'CommentsController@postComment');
 
 Route::get('/comments', 'CommentsController@index');
+
+// login
+Route::get('/login', 'LoginController@create');
+Route::post('/login', 'LoginController@store');
+
 
 

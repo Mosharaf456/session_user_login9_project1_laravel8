@@ -79,6 +79,11 @@ class VideosController extends Controller
      */
     public function edit($id)
     {
+        if(!session()->has('user_name'))
+        {
+            return back();
+        }
+        
         $video = Video::find($id);
         $selected_tag = $video->tags->pluck('id');
         // return $selected_tag;

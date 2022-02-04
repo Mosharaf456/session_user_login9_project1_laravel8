@@ -6,14 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Polymorphic manyTOmany </title>
+    <title>Video Lists _p_m-m </title>
 </head>
 <body>
     <div class="container">
+        
         <h3>Vedios List</h3>
         {{-- table>tr>th*4 
              tr>td*4
             --}}
+{{-- 1way --}}
+            <p> {{ request()->session()->get('user_name') }} </p>
+            {{-- 2nd --}}
+            <p> {{ session()->get('user_name' , 'Default Value') }} </p>
+            <p> {{ session()->has('user_name') }} </p>
+            <p> {{ session()->exists('user_name')?'Yes':'no' }} </p>
         <table class="table">
             <tr>
                 <th>@id</th>
